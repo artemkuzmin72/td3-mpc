@@ -3,8 +3,8 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from td3_agent.actor import Actor
-from td3_agent.critic import Critic
+from turtlebot_rl.td3_agent.actor import Actor
+from turtlebot_rl.td3_agent.critic import Critic
 
 
 device = torch.device(
