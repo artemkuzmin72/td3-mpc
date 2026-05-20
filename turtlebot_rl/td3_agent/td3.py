@@ -14,13 +14,7 @@ device = torch.device(
 
 
 class TD3:
-
-    def __init__(
-        self,
-        state_dim,
-        action_dim,
-        max_action
-    ):
+    def __init__(self, state_dim, action_dim, max_action):
 
         self.actor = Actor(
             state_dim,

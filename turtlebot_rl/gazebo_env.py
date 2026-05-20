@@ -7,13 +7,7 @@ class GazeboEnv:
 
         self.state_dim = 24
 
-    def build_state(
-        self,
-        lidar,
-        x,
-        y,
-        yaw
-    ):
+    def build_state(self, lidar, x, y, yaw):
 
         state = np.zeros(24)
 

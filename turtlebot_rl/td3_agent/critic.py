@@ -5,11 +5,7 @@ import torch.nn.functional as F
 
 class Critic(nn.Module):
 
-    def __init__(
-        self,
-        state_dim,
-        action_dim
-    ):
+    def __init__(self, state_dim, action_dim):
         super(Critic, self).__init__()
 
         self.fc1 = nn.Linear(
