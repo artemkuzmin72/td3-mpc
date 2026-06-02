@@ -1,20 +1,18 @@
 from setuptools import setup, find_packages
 
-package_name = 'turtlebot_rl'
 
 setup(
-    name=package_name,
+    name='turtlebot_rl',
     version='0.0.0',
     packages=find_packages(),
 
     data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/display.launch.py']),
-        ('share/' + package_name + '/urdf', ['urdf/robot.urdf.xacro']),
-        ('share/' + package_name + '/weights', ['weights/actor.pth'])
-    ],
+    ('share/ament_index/resource_index/packages',
+        ['resource/turtlebot_rl']),
+    ('share/turtlebot_rl', ['package.xml']),
+    ('share/turtlebot_rl/launch', ['launch/maze.launch.py']),
+    ('share/turtlebot_rl/worlds', ['worlds/maze.world']),
+],
     
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,7 +28,9 @@ setup(
     entry_points={
         'console_scripts': [
             'rl_node = turtlebot_rl.rl_node:main',
-            'sim_base = turtlebot_rl.sim_base:main',
+            'env_node = turtlebot_rl.env_node:main',
+            'train_node = turtlebot_rl.train.train_node:main',
+            'sim_node = turtlebot_rl.sim_node:main'
         ],
     },
 )

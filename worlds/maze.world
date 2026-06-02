@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+
+<world name="maze_world">
+
+  <!-- ===================== -->
+  <!-- PHYSICS              -->
+  <!-- ===================== -->
+  <physics type="ode">
+    <real_time_update_rate>1000</real_time_update_rate>
+    <max_step_size>0.001</max_step_size>
+  </physics>
+
+  <!-- ===================== -->
+  <!-- GAZEBO ROS PLUGINS   -->
+  <!-- ===================== -->
+
+  <!-- 🔥 state publisher (не обязательно, но полезно) -->
+  <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so"/>
+
+  <!-- ===================== -->
+  <!-- LIGHT + GROUND       -->
+  <!-- ===================== -->
+  <include>
+    <uri>model://sun</uri>
+  </include>
+
+  <include>
+    <uri>model://ground_plane</uri>
+  </include>
+
+  <!-- ===================== -->
+  <!-- OUTER WALLS          -->
+  <!-- ===================== -->
+
+  <model name="north_wall">
+    <static>true</static>
+    <pose>0 5 0.5 0 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>10 0.2 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>10 0.2 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="south_wall">
+    <static>true</static>
+    <pose>0 -5 0.5 0 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>10 0.2 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>10 0.2 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="east_wall">
+    <static>true</static>
+    <pose>5 0 0.5 0 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>0.2 10 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>0.2 10 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="west_wall">
+    <static>true</static>
+    <pose>-5 0 0.5 0 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>0.2 10 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>0.2 10 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <!-- ===================== -->
+  <!-- MAZE STRUCTURE       -->
+  <!-- ===================== -->
+
+  <model name="wall_1">
+    <static>true</static>
+    <pose>-2 2 0.5 0 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>6 0.2 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>6 0.2 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="wall_2">
+    <static>true</static>
+    <pose>1 0 0.5 0 0 1.57</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>6 0.2 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>6 0.2 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="wall_3">
+    <static>true</static>
+    <pose>-1 -2 0.5 0 0 1.57</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry><box><size>4 0.2 1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>4 0.2 1</size></box></geometry>
+      </visual>
+    </link>
+  </model>
+
+  <!-- ===================== -->
+  <!-- GOAL                 -->
+  <!-- ===================== -->
+
+  <model name="goal">
+    <static>true</static>
+    <pose>4 4 0.2 0 0 0</pose>
+
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <sphere><radius>0.3</radius></sphere>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <sphere><radius>0.3</radius></sphere>
+        </geometry>
+
+        <material>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+</world>
+</sdf>

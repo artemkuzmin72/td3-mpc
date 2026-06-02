@@ -1,32 +1,29 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 
 class Critic(nn.Module):
+    def __init__(self, state_dim=24, action_dim=2):
+        super().__init__()
 
-    def __init__(self, state_dim, action_dim):
-        super(Critic, self).__init__()
-
-        self.fc1 = nn.Linear(
-            state_dim + action_dim,
-            256
+        # Q1
+        self.q1 = nn.Sequential(
+            nn.Linear(state_dim + action_dim, 256),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1)
         )
 
-        self.fc2 = nn.Linear(256, 256)
-
-        self.fc3 = nn.Linear(256, 1)
+        # Q2
+        self.q2 = nn.Sequential(
+            nn.Linear(state_dim + action_dim, 256),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1)
+        )
 
     def forward(self, state, action):
-
-        x = torch.cat(
-            [state, action],
-            dim=1
-        )
-
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-
-        q = self.fc3(x)
-
-        return q
+        sa = torch.cat([state, action], dim=1)
+        return self.q1(sa), self.q2(sa)
