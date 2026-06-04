@@ -56,7 +56,7 @@ class TrainNode(Node):
 
         # ===== STATE =====
 
-        self.state = self.env.reset()
+        self.state = self.env.get_state()
 
         self.episode_reward = 0
 
@@ -99,7 +99,6 @@ class TrainNode(Node):
     # --------------------------------------------------
 
     def loop(self):
-
         if self.done:
 
             self.get_logger().warn(
@@ -114,13 +113,13 @@ class TrainNode(Node):
                     f"NEW BEST REWARD = {self.best_reward:.2f}"
                 )
 
-            self.state = self.env.reset()
-
             self.episode_reward = 0.0
 
             self.episode += 1
 
             self.done = False
+
+            self.state = self.env.get_state()
 
             return
 
