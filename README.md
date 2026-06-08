@@ -41,3 +41,7 @@ Technologies:
 ## Weights
 
 Веса модели автоматически сохраняются в папку weights, также сохраняется replay_buffer для последующего fine tuning.
+
+## Results
+
+![Plot](results/Train_Plot.png)   
